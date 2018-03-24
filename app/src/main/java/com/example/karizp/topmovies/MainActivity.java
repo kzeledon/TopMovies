@@ -32,6 +32,27 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Movie> movies=new ArrayList<>();
     Bitmap bitmap;
 
+    public void loadMovies()
+    {
+        for(int i = 0; i < 20; i++)
+        {
+
+            try {
+                ImageDownloadTask imageDownloadTask = new ImageDownloadTask();
+                Log.i("loadMovies","loading "+src[i]);
+
+                bitmap = imageDownloadTask.execute(src[i]).get();
+                Movie movie = new Movie(titles[i],stars[i],metaScores[i],bitmap);
+                movies.add(movie);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,26 +74,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void loadMovies()
-    {
-        for(int i = 0; i < 20; i++)
-        {
-
-            try {
-                ImageDownloadTask imageDownloadTask = new ImageDownloadTask();
-                Log.i("loadMovies","loading "+src[i]);
-
-                bitmap = imageDownloadTask.execute(src[i]).get();
-                Movie movie = new Movie(titles[i],stars[i],metaScores[i],bitmap);
-                movies.add(movie);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
 
     class DownloadTask extends AsyncTask<String, String, String>
     {

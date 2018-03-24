@@ -37,8 +37,8 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         ImageView poster = v.findViewById(R.id.imageViewPoster);
 
         title.setText(movies.get(pos).getTitle());
-        stars.setText(movies.get(pos).getStars());
-        metascore.setText(movies.get(pos).getMetaScore());
+        stars.setText("Stars: "+movies.get(pos).getStars());
+        metascore.setText("Metascore: "+movies.get(pos).getMetaScore());
 
         if(movies.get(pos).getMoviePoster() !=  null)
             poster.setImageBitmap(movies.get(pos).getMoviePoster());
